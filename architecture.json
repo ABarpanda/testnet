@@ -1,0 +1,53 @@
+[
+  {
+    "id": "3xwcn9k",
+    "kind": "Input",
+    "params": {
+      "shape": "3,224,224",
+      "out_channels": 3
+    },
+    "inputs": []
+  },
+  {
+    "id": "19doq13",
+    "kind": "Conv2d",
+    "params": {
+      "out_channels": 64,
+      "kernel_size": 3,
+      "stride": 1,
+      "padding": 1
+    },
+    "inputs": [
+      "3xwcn9k"
+    ]
+  },
+  {
+    "id": "zapa8l8",
+    "kind": "MaxPool2d",
+    "params": {
+      "kernel_size": 2,
+      "stride": 2
+    },
+    "inputs": [
+      "19doq13"
+    ]
+  },
+  {
+    "id": "lw7rmzx",
+    "kind": "Dropout",
+    "params": {
+      "p": 0.5
+    },
+    "inputs": [
+      "zapa8l8"
+    ]
+  },
+  {
+    "id": "r3uwrk7",
+    "kind": "Flatten",
+    "params": {},
+    "inputs": [
+      "lw7rmzx"
+    ]
+  }
+]
