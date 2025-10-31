@@ -14,7 +14,7 @@ def conv2d(layer, architecture_json: dict):
     p = layer["params"].get("padding", 1)
     return f"nn.Conv2d(in_channels = {in_ch}, out_channels = {out_ch}, kernel_size={k}, stride={s}, padding={p})"
 
-def batchnorm2d(layer, architecture_json: dict):
+def batchnorm2d(layer):
     num_features = layer["params"].get("num_features", 16)
     return f"nn.BatchNorm2d(num_features={num_features})"
 
@@ -36,7 +36,7 @@ def flatten(_):
     return "nn.Flatten()"
 
 def linear(layer):
-    inp = layer["params"].get("in_features", 128)
+    _, inp = layer["params"].get("in_shape", 128)
     out = layer["params"].get("out_features", 10)
     return f"nn.Linear({inp}, {out})"
 

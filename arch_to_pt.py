@@ -6,7 +6,7 @@ from typing import List
 def write_pytorch(architecture_json: List, save_path: str = "generated_model.py"):
 
     assert architecture_json[0]["kind"] == "Input", "First layer must be Input layer"
-    import layer_functions as lf
+    import layer_functions
 
     functions = {
         "Conv2d": "nn.Conv2d",
@@ -27,9 +27,9 @@ def write_pytorch(architecture_json: List, save_path: str = "generated_model.py"
     for layer in architecture_json[1:]:
         kind = layer["kind"]
         if kind in functions:
-            func = getattr(lf, kind.lower())
+            func = getattr(layer_functions, kind.lower())
             if kind == "Conv2d":
-                layer_code = func(layer, architecture_json)  
+                layer_code = func(layer, architecture_json)
             else:
                 layer_code = func(layer)
             # print(f'Generated code for layer {layer}: {layer_code}')
